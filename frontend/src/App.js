@@ -1,28 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import WeatherWidget from './components/WeatherWidget'
+import { connect } from 'react-redux'
+import {fetchData} from './store/actions/dataAction'
 
 class App extends Component {
+  componentWillMount(){
+    this.props.fetchData(this.state);  
+  }
+
   render() {
+    const {data} = this.props;
+    
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Dark Sky API Weather Implementation</h1>
+        <p>Please select your desired location and optionally the date</p>
+        <input type="text" className="location" placeholder="New York, Bucharest etc" />
+        <WeatherWidget data={data}/>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    data: state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: (data) => dispatch(fetchData(data))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

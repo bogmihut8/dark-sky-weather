@@ -12,3 +12,60 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+html {
+  background: #5C258D;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4389A2, #5C258D);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4389A2, #5C258D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.App {
+    width: 90%;
+    max-width: 850px;
+    margin: 0 auto; 
+    text-align: center;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.App > .location {
+    color: white;
+    background: transparent;
+    border: 0;
+    width: 300px;
+    border-bottom: 1px solid white;
+    height: 40px;
+    font-size: 25px;
+  font-weight:300;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.App > .location::placeholder {
+  color: white;
+  font-weight:100;
+}
+
+.App .widget {
+  background-color:rgba(0,0,0,0.1);
+  margin-top:40px;
+  padding:5px 10px 15px 10px;
+}
+
+.App .widget .temp {
+  font-size:60px;
+  margin:0;
+}
+
+.App .widget .city {
+  margin-bottom:0;
+  font-size:30px;
+  margin-top: 10px;
+}
+
+.App .widget .country {
+  margin-top:0;
+}
+
+.lighter {
+  font-weight:300;
+}
