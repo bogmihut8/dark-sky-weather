@@ -1,14 +1,13 @@
 const request = require("request-promise")
 const moment = require("moment")
-const queryString = require("query-string")
 
 class DarkSky {
   constructor(apiKey) {
-    this.apiKey = apiKey
-    this.longVal = null
-    this.latVal = null
-    this.timeVal = null
-    this.url = `https://api.darksky.net/forecast/${this.apiKey}/`;
+    this.apiKey = apiKey;
+    this.longVal = null;
+    this.latVal = null;
+    this.timeVal = null;
+    this.url = null;
   }
   
   _exists(val) {
@@ -18,13 +17,19 @@ class DarkSky {
     return true;
   }
   
+  _setUrl() {
+    this.url = `https://api.darksky.net/forecast/${this.apiKey}/`;
+  }
+  
   _addParams() {
+    this._setUrl();
     this.url += `${this.latVal},${this.longVal}`
     
     if(this.timeVal) {
       this.url += `,${this.timeVal}`
     }
-    return true
+      
+    this.url += `?units=si`;
   }
 
   long(longVal) {

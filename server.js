@@ -1,4 +1,6 @@
-const http = require('http');
+const express = require('express')
+const app = express()
+const port = 3001
 const DarkSky = require('./dark-sky')
 const darksky = new DarkSky('fb9f3a9953d9305d6b9ecdd2a909fe3a')
 const NodeGeocoder = require('node-geocoder');
@@ -10,22 +12,26 @@ const options = {
 
 const geocoder = NodeGeocoder(options);
 
-const app = http.createServer((req,res) => {
-    res.setHeader('Content-Type', 'application/json');
-  
-    geocoder.geocode(process.env.LOCATION)
+app.get('/data', (req, res) => {
+  let location = req.query.location;
+
+  geocoder.geocode(location)
     .then((data) => {
       darksky.lat(data[0].latitude).long(data[0].longitude)           
-        .time('2019-01-27')         
+        .time('2019-03-22')         
         .get()                          
-        .then((data) => {
-          res.end(JSON.stringify(data));
+        .then((darkskyData) => {
+          let responseData = {
+            ...darkskyData,
+            city: data[0].city + ", " + data[0].countryCode
+          }
+          res.send(JSON.stringify(responseData));
         })
         .catch(console.log)  
     })
     .catch((err) => {
       console.log(err);
     });
-  
-});
-app.listen(3001);
+})
+
+app.listen(port, () => console.log(`App listening on port ${port}!`))

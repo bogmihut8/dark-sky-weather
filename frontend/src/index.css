@@ -28,7 +28,7 @@ html {
     font-family: 'Quicksand', sans-serif;
 }
 
-.App > .location {
+.App > form .location {
     color: white;
     background: transparent;
     border: 0;
@@ -36,11 +36,11 @@ html {
     border-bottom: 1px solid white;
     height: 40px;
     font-size: 25px;
-  font-weight:300;
+    font-weight:300;
     font-family: 'Quicksand', sans-serif;
 }
 
-.App > .location::placeholder {
+.App > form .location::placeholder {
   color: white;
   font-weight:100;
 }
