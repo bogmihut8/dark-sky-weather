@@ -5,7 +5,7 @@ import {fetchData} from './store/actions/dataAction'
 
 class App extends Component { 
   state = {
-    location: "Cluj-Napoca",
+    location: "",
     date: ""
   }
   
@@ -18,10 +18,6 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.fetchData(this.state); 
-  }
-  
-  componentWillMount(){
-    this.props.fetchData(this.state);  
   }
 
   render() {

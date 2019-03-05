@@ -4,7 +4,11 @@ const initState = {
   date: '',
   currently: {
     temperature: 0,
-    summary: ''
+    summary: '',
+    precipProbability: '',
+    windSpeed: '',
+    humidity: '',
+    icon: ''
   }
 }
 
