@@ -14,11 +14,12 @@ const geocoder = NodeGeocoder(options);
 
 app.get('/data', (req, res) => {
   let location = req.query.location;
-
+  let date = req.query.date;
+  console.log(date);
   geocoder.geocode(location)
     .then((data) => {
       darksky.lat(data[0].latitude).long(data[0].longitude)           
-        .time('2019-03-22')         
+        .time(date)         
         .get()                          
         .then((darkskyData) => {
           let responseData = {

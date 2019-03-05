@@ -5,7 +5,8 @@ import {fetchData} from './store/actions/dataAction'
 
 class App extends Component { 
   state = {
-    location: "Cluj-Napoca"
+    location: "Cluj-Napoca",
+    date: ""
   }
   
   handleChange = (e) => {
@@ -30,9 +31,12 @@ class App extends Component {
       <div className="App">
         <h1>Dark Sky API Weather Implementation</h1>
         <p>Please select your desired location and optionally the date:</p>
-        <form onSubmit={this.handleSubmit} className="col s12 m8 offset-m2 white">
+        <form onSubmit={this.handleSubmit} className="params">
           <input type="text" id="location" onChange={this.handleChange} className="location" placeholder="New York, Bucharest etc" />
+          <input type="date" id="date" onChange={this.handleChange} className="date" />
+          <input type="submit" value="Submit" id="submit" />
         </form>
+        <p>The date can be from the past (observed) or from the future (forcasted)</p>
         <WeatherWidget data={data}/>
       </div>
     );

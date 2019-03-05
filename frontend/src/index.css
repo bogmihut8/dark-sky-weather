@@ -28,7 +28,7 @@ html {
     font-family: 'Quicksand', sans-serif;
 }
 
-.App > form .location {
+.App > form.params input#location, .App > form.params input#date {
     color: white;
     background: transparent;
     border: 0;
@@ -40,9 +40,29 @@ html {
     font-family: 'Quicksand', sans-serif;
 }
 
-.App > form .location::placeholder {
+.App > form.params input::placeholder {
   color: white;
   font-weight:100;
+}
+
+.App > form.params input#date {
+  margin-left:20px;
+}
+
+.App > form.params input#submit {
+    color: white;
+    background: transparent;
+    border: 1px solid white;
+    margin-left:20px;
+    height:40px;
+    font-size:25px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.App > form.params input#submit:hover {
+    color: #5C258D;
+    background: white;
+    cursor: pointer;
 }
 
 .App .widget {
