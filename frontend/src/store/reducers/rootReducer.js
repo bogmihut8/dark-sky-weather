@@ -1,22 +1,39 @@
-const initState = {
-  city: "",
-  summary: '',
-  date: '',
-  currently: {
-    temperature: 0,
-    summary: '',
-    precipProbability: '',
-    windSpeed: '',
-    humidity: '',
-    icon: ''
-  }
-}
-
-const rootReducer = (state = initState, action) => {
+const rootReducer = (state = {}, action) => {
    switch (action.type) {
     case 'FETCHED_DATA':
-      console.log("data fetched", {...state, ...action.data});
-      return {...action.data};
+      return {
+        ...state,
+        isLoading: false,
+        time: action.data.currently.time,
+        timezone: action.data.timezone,
+        location: action.data.location,
+        daily: {
+            temperatureMax: action.data.daily.data[0].temperatureMax,
+            temperatureMin: action.data.daily.data[0].temperatureMin,
+            summary: action.data.daily.data[0].summary,
+            icon: action.data.daily.data[0].icon,
+            precipProbability: action.data.daily.data[0].precipProbability,
+            windSpeed: action.data.daily.data[0].windSpeed,
+            humidity: action.data.daily.data[0].humidity
+          
+        }
+      };
+     case 'START_LOADING':
+       return {
+         ...state,
+          isLoading: true,
+          daily : null
+       }
+     case 'SET_DATE':
+       return {
+         ...state,
+         date: action.data
+       }
+     case 'SET_LOCATION':
+       return {
+         ...state,
+         location: action.data
+       }
     default:
       return state;
   }

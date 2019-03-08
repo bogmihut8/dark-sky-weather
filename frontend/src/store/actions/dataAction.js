@@ -3,9 +3,9 @@ import axios from 'axios';
 export const fetchData = (data) => {
   return (dispatch, getState) => {
     // make async call to database
-    console.log("In action: " + data.location + " with date: " + data.date);
+    const state = getState();
     axios
-      .get(`/data`, {params: {location: data.location, date: data.date}})
+      .get(`/data`, {params: {location: state.location, date: state.date}})
       .then(res => {
         dispatch({ type: 'FETCHED_DATA', data: res.data });
       })

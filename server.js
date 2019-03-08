@@ -15,7 +15,7 @@ const geocoder = NodeGeocoder(options);
 app.get('/data', (req, res) => {
   let location = req.query.location;
   let date = req.query.date;
-  console.log(date);
+
   geocoder.geocode(location)
     .then((data) => {
       darksky.lat(data[0].latitude).long(data[0].longitude)           
@@ -24,7 +24,7 @@ app.get('/data', (req, res) => {
         .then((darkskyData) => {
           let responseData = {
             ...darkskyData,
-            city: data[0].city + ", " + data[0].countryCode
+            location: data[0].city
           }
           res.send(JSON.stringify(responseData));
         })
