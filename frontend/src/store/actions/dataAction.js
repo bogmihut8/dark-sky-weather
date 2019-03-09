@@ -5,7 +5,7 @@ export const fetchData = (data) => {
     // make async call to database
     const state = getState();
     axios
-      .get(`/data`, {params: {location: state.location, date: state.date}})
+      .get(`/data`, {params: {location: state.location, countryCode: state.countryCode, date: state.date}})
       .then(res => {
         dispatch({ type: 'FETCHED_DATA', data: res.data });
       })

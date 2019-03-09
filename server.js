@@ -5,18 +5,29 @@ const DarkSky = require('./dark-sky')
 const darksky = new DarkSky('fb9f3a9953d9305d6b9ecdd2a909fe3a')
 const NodeGeocoder = require('node-geocoder');
 
+// const options = {
+//   provider: 'mapquest',
+//   apiKey: 'nKdKSQZb22Nm984QWhTXoIC3VRDhjqK7'
+// }; 
+
+// const options = {
+//   provider: 'opencage',
+//   apiKey: '0b675c47de9c4488b400828b76afb085'
+// }; 
+
 const options = {
-  provider: 'mapquest',
-  apiKey: 'nKdKSQZb22Nm984QWhTXoIC3VRDhjqK7'
-};
+  provider: 'google',
+  apiKey: 'AIzaSyCDY0eJpkeOTx-kIqGtYzDPGAPCcwlavqo'
+}; 
 
 const geocoder = NodeGeocoder(options);
 
 app.get('/data', (req, res) => {
   let location = req.query.location;
+  let countryCode = req.query.countryCode;
   let date = req.query.date;
 
-  geocoder.geocode(location)
+  geocoder.geocode({address: location, country: countryCode})
     .then((data) => {
       darksky.lat(data[0].latitude).long(data[0].longitude)           
         .time(date)         
@@ -24,7 +35,8 @@ app.get('/data', (req, res) => {
         .then((darkskyData) => {
           let responseData = {
             ...darkskyData,
-            location: data[0].city
+            location: data[0].city,
+            countryCode: data[0].countryCode
           }
           res.send(JSON.stringify(responseData));
         })

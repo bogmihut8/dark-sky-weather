@@ -13,8 +13,15 @@ class App extends Component {
   }
 
   handleLocationSubmit = (param) => {
+    let countryCode;
+    for (var value of param.address_components) {
+      if (value.types.includes('country')) {
+        countryCode = value.short_name;
+      }
+    }
+
     this.props.startLoading();
-    this.props.setLocation(param.name)
+    this.props.setLocation(param.name, countryCode)
     this.props.fetchData();
   }
 
@@ -47,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchData: (data) => dispatch(fetchData()),
     startLoading: () => dispatch({ type: 'START_LOADING', data: {} }),
     setDate: (date) => dispatch({ type: 'SET_DATE', data: date }),
-    setLocation: (location) => dispatch({ type: 'SET_LOCATION', data: location })
+    setLocation: (location, countryCode) => dispatch({ type: 'SET_LOCATION', data: {location: location, countryCode: countryCode} })
   }
 };
 

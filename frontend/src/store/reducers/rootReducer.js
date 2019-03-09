@@ -7,6 +7,7 @@ const rootReducer = (state = {}, action) => {
         time: action.data.currently.time,
         timezone: action.data.timezone,
         location: action.data.location,
+        countryCode: action.data.countryCode,
         daily: {
             temperatureMax: action.data.daily.data[0].temperatureMax,
             temperatureMin: action.data.daily.data[0].temperatureMin,
@@ -32,7 +33,7 @@ const rootReducer = (state = {}, action) => {
      case 'SET_LOCATION':
        return {
          ...state,
-         location: action.data
+         ...action.data
        }
     default:
       return state;
