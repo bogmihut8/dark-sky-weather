@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import WeatherWidget from './components/WeatherWidget'
 import { connect } from 'react-redux'
-import {fetchData} from './store/actions/dataAction'
+import {fetchData, currentLocationData} from './store/actions/dataAction'
 import Autocomplete from "./components/Autocomplete";
 
 class App extends Component { 
   
   handleDateChange = (param) => {
     this.props.startLoading();
-    this.props.setDate(param.target.value);
+    this.props.setDate(parseInt(new Date(param.target.value).getTime() / 1000));
     this.props.fetchData();
   }
 
@@ -23,6 +23,16 @@ class App extends Component {
     this.props.startLoading();
     this.props.setLocation(param.name, countryCode)
     this.props.fetchData();
+  }
+  
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+    (position) => {
+       const date = parseInt(new Date().getTime() / 1000);
+       this.props.startLoading();
+       this.props.currentLocationData(position.coords.latitude, position.coords.longitude, date);
+     }
+    )
   }
 
   render() {
@@ -51,7 +61,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (data) => dispatch(fetchData()),
+    fetchData: () => dispatch(fetchData()),
+    currentLocationData: (lat, long, date) => dispatch(currentLocationData(lat, long, date)),
     startLoading: () => dispatch({ type: 'START_LOADING', data: {} }),
     setDate: (date) => dispatch({ type: 'SET_DATE', data: date }),
     setLocation: (location, countryCode) => dispatch({ type: 'SET_LOCATION', data: {location: location, countryCode: countryCode} })

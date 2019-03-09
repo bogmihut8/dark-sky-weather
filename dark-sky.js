@@ -48,7 +48,7 @@ class DarkSky {
 
   time(time) {
     if(this._exists(time)){
-      this.timeVal = moment(new Date(time)).format("YYYY-MM-DDTHH:mm:ss")
+      this.timeVal = time;
     } else {
       this.timeVal = null
     }

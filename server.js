@@ -47,4 +47,29 @@ app.get('/data', (req, res) => {
     });
 })
 
+app.get('/currentLocation', (req, res) => {
+  let lat = req.query.lat;
+  let long = req.query.long;
+  let date = req.query.date;
+
+  geocoder.reverse({lat:lat, lon:long})
+    .then((data) => {
+      darksky.lat(lat).long(long) 
+         .time(date)
+         .get()                          
+         .then((darkskyData) => {
+           let responseData = {
+             ...darkskyData,
+             location: data[0].city,
+             countryCode: data[0].countryCode
+           }
+           res.send(JSON.stringify(responseData));
+          })
+          .catch(console.log) 
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+})
+
 app.listen(port, () => console.log(`App listening on port ${port}!`))
