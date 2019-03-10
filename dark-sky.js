@@ -1,5 +1,4 @@
 const request = require("request-promise")
-const moment = require("moment")
 
 class DarkSky {
   constructor(apiKey) {

@@ -7,9 +7,14 @@ import Autocomplete from "./components/Autocomplete";
 class App extends Component { 
   
   handleDateChange = (param) => {
-    this.props.startLoading();
-    this.props.setDate(parseInt(new Date(param.target.value).getTime() / 1000));
-    this.props.fetchData();
+    if(this.restrictPastDate() <= new Date(param.target.value).toISOString().slice(0,10)) {
+      this.props.startLoading();
+      this.props.setDate(parseInt(new Date(param.target.value).getTime() / 1000));
+      this.props.fetchData();
+    }
+    else {
+      this.props.dispatchError();
+    }
   }
 
   handleLocationSubmit = (param) => {
@@ -23,6 +28,12 @@ class App extends Component {
     this.props.startLoading();
     this.props.setLocation(param.name, countryCode)
     this.props.fetchData();
+  }
+  
+  restrictPastDate() {
+    const priordate = new Date();
+    priordate.setDate(new Date().getDate()-30);
+    return priordate.toISOString().slice(0,10);
   }
   
   componentDidMount() {
@@ -44,9 +55,9 @@ class App extends Component {
         <p>Please select your desired location and optionally the date:</p>
         <div className="params">
           <Autocomplete onPlaceChanged={this.handleLocationSubmit.bind(this)} />
-          <input type="date" id="date" onChange={this.handleDateChange.bind(this)} className="date" />
+          <input type="date" placeholder="Date" id="date" onChange={this.handleDateChange.bind(this)} className="date" min={this.restrictPastDate()}/>
         </div>
-        <p>The date can be from the past (observed) or from the future (forcasted)</p>
+        <p>The date can be from the past 30 days (observed) or from the future (forcasted)</p>
         <WeatherWidget data={data}/>
       </div>
     );
@@ -65,7 +76,8 @@ const mapDispatchToProps = (dispatch) => {
     currentLocationData: (lat, long, date) => dispatch(currentLocationData(lat, long, date)),
     startLoading: () => dispatch({ type: 'START_LOADING', data: {} }),
     setDate: (date) => dispatch({ type: 'SET_DATE', data: date }),
-    setLocation: (location, countryCode) => dispatch({ type: 'SET_LOCATION', data: {location: location, countryCode: countryCode} })
+    setLocation: (location, countryCode) => dispatch({ type: 'SET_LOCATION', data: {location: location, countryCode: countryCode} }),
+    dispatchError: () => dispatch({ type: 'ERROR_OCC', data: {err: 'Something went wrong. Selected date might be too old.'} })
   }
 };
 

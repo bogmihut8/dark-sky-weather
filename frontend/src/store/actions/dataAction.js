@@ -10,7 +10,7 @@ export const fetchData = () => {
         dispatch({ type: 'FETCHED_DATA', data: res.data });
       })
       .catch(err => {
-        console.log(err);
+        dispatch({ type: 'ERROR_OCC', data: {err: 'Something went wrong. Make sure the introduced values are valid.'} });
       });
     ;
   }
@@ -25,7 +25,7 @@ export const currentLocationData = (lat, long, date) => {
         dispatch({ type: 'FETCHED_DATA', data: res.data });
       })
       .catch(err => {
-        console.log(err);
+        dispatch({ type: 'ERROR_OCC', data: {err: 'Something went wrong. Try again'} });
       });
     ;
   }

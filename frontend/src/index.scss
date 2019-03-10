@@ -36,6 +36,7 @@ html {
         font-size: 25px;
         font-weight:300;
         font-family: 'Quicksand', sans-serif;
+        padding-bottom:0;
     }
 
     & > div.params input::placeholder {
@@ -48,6 +49,12 @@ html {
     }
 
     & .widget {
+      &.error {
+        padding-top:15px;
+        & .red {
+          color: red;
+        }
+      }
       background-color:rgba(0,0,0,0.1);
       margin-top:40px;
       padding:5px 10px 15px 10px;
@@ -130,3 +137,13 @@ html {
     opacity: 0;
   }
 }
+
+input[type="date"]:before {
+    content: attr(placeholder) !important;
+    color: #fff;
+    margin-right: 0.5em;
+  }
+  input[type="date"]:focus:before,
+  input[type="date"]:valid:before {
+    content: "";
+  }

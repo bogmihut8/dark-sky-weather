@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import WeatherIcon from 'react-icons-weather';
 
 const WeatherWidget = ({data}) => {
@@ -21,6 +22,11 @@ const WeatherWidget = ({data}) => {
         </div>
       );
     }
+    else if(data.err){
+      return (
+      <div className="widget error"><span className="red">&#9888;</span> {data.err} <span className="red">&#9888;</span></div>
+      )
+    }
     else {
       return (
       <div></div>
@@ -28,5 +34,23 @@ const WeatherWidget = ({data}) => {
     }
   }
 };
+
+WeatherWidget.propTypes = {
+  data: PropTypes.shape({
+      location: PropTypes.string,
+      countryCode: PropTypes.string,
+      timezone: PropTypes.string,
+      time: PropTypes.number,
+      daily: PropTypes.shape({
+        icon: PropTypes.string,
+        temperatureMax: PropTypes.number,
+        temperatureMin: PropTypes.number,
+        summary: PropTypes.string,
+        precipProbability: PropTypes.number,
+        humidity: PropTypes.number,
+        windSpeed: PropTypes.number
+      })
+    })
+}
 
 export default WeatherWidget;

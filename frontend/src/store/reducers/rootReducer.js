@@ -35,6 +35,13 @@ const rootReducer = (state = {}, action) => {
          ...state,
          ...action.data
        }
+     case 'ERROR_OCC':
+       return {
+         ...state,
+         isLoading: false,
+         daily: null,
+         err: action.data.err
+       }
     default:
       return state;
   }
