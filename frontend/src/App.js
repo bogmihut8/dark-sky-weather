@@ -3,17 +3,19 @@ import WeatherWidget from './components/WeatherWidget'
 import { connect } from 'react-redux'
 import {fetchData, currentLocationData} from './store/actions/dataAction'
 import Autocomplete from "./components/Autocomplete";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class App extends Component { 
   
   handleDateChange = (param) => {
     this.props.startLoading();
-    if(!param.target.value) {
-      this.props.setDate(this.unixDateToday());
+    if(!param) {
+      this.props.setDate(this.unixDate());
       this.props.fetchData();
     }
-    else if(this.restrictPastDate() <= new Date(param.target.value).toISOString().slice(0,10)) {
-      this.props.setDate(parseInt(new Date(param.target.value).getTime() / 1000));
+    else if(this.restrictPastDate() <= this.unixDate(param)) {
+      this.props.setDate(this.unixDate(param));
       this.props.fetchData();
     }
     else {
@@ -38,17 +40,21 @@ class App extends Component {
   restrictPastDate() {
     const priordate = new Date();
     priordate.setDate(new Date().getDate()-30);
-    return priordate.toISOString().slice(0,10);
+    return parseInt(new Date(priordate).getTime() / 1000);
   }
 
-  unixDateToday() {
-    return parseInt(new Date().getTime() / 1000);
+  unixDate(date) {
+    if(date) {
+      return parseInt(new Date(date).getTime() / 1000)  
+    } else {
+      return parseInt(new Date().getTime() / 1000);
+    }
   }
   
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
     (position) => {
-       const date = this.unixDateToday();
+       const date = this.unixDate();
        this.props.startLoading();
        this.props.currentLocationData(position.coords.latitude, position.coords.longitude, date);
      }
@@ -64,7 +70,7 @@ class App extends Component {
         <p>Please select your desired location and optionally the date:</p>
         <div className="params">
           <Autocomplete onPlaceChanged={this.handleLocationSubmit.bind(this)} />
-          <input type="date" placeholder="Date" id="date" onChange={this.handleDateChange.bind(this)} className="date" min={this.restrictPastDate()}/>
+          <DatePicker onChange={this.handleDateChange.bind(this)} placeholderText="Select a date" />
         </div>
         <p>The date can be from the past 30 days (observed) or from the future (forcasted)</p>
         <WeatherWidget data={data}/>

@@ -38,6 +38,7 @@ app.get('/data', (req, res) => {
             location: data[0].city,
             countryCode: data[0].countryCode
           }
+
           res.send(JSON.stringify(responseData));
         })
         .catch(console.log)  

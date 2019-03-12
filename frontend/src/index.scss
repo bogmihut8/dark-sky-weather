@@ -26,7 +26,7 @@ html {
     text-align: center;
     color: white;
     font-family: 'Quicksand', sans-serif;
-    & > div.params input#location, & > div.params input#date {
+    & > div.params input#location, & > div.params .react-datepicker__input-container input {
         color: white;
         background: transparent;
         border: 0;
@@ -44,7 +44,7 @@ html {
       font-weight:100;
     }
 
-    & > div.params input#date {
+    & > div.params .react-datepicker__input-container input {
       margin-left:20px;
     }
 
@@ -162,16 +162,6 @@ html {
   }
 }
 
-input[type="date"]:before {
-    content: attr(placeholder) !important;
-    color: #fff;
-    margin-right: 0.5em;
-  }
-  input[type="date"]:focus:before,
-  input[type="date"]:valid:before {
-    content: "";
-  }
-
 .menu-item {
   padding: 0 40px;
   margin: 5px 10px;
@@ -195,7 +185,7 @@ input[type="date"]:before {
       input {
         margin-bottom:20px;
       }
-      & > input#date {
+      & > .react-datepicker__input-container input {
         margin-left:0;
       }
     }

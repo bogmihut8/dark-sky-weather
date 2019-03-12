@@ -17,7 +17,6 @@ const rootReducer = (state = {}, action) => {
             precipProbability: action.data.daily.data[0].precipProbability,
             windSpeed: action.data.daily.data[0].windSpeed,
             humidity: action.data.daily.data[0].humidity
-          
         },
         hourly : {
           ...action.data.hourly
