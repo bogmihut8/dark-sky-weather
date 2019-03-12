@@ -7,8 +7,12 @@ import Autocomplete from "./components/Autocomplete";
 class App extends Component { 
   
   handleDateChange = (param) => {
-    if(this.restrictPastDate() <= new Date(param.target.value).toISOString().slice(0,10)) {
-      this.props.startLoading();
+    this.props.startLoading();
+    if(!param.target.value) {
+      this.props.setDate(this.unixDateToday());
+      this.props.fetchData();
+    }
+    else if(this.restrictPastDate() <= new Date(param.target.value).toISOString().slice(0,10)) {
       this.props.setDate(parseInt(new Date(param.target.value).getTime() / 1000));
       this.props.fetchData();
     }
@@ -19,15 +23,16 @@ class App extends Component {
 
   handleLocationSubmit = (param) => {
     let countryCode;
-    for (var value of param.address_components) {
-      if (value.types.includes('country')) {
-        countryCode = value.short_name;
+    if(param.address_components) {
+      for (var value of param.address_components) {
+        if (value.types.includes('country')) {
+          countryCode = value.short_name;
+        }
       }
+      this.props.startLoading();
+      this.props.setLocation(param.name, countryCode)
+      this.props.fetchData();
     }
-
-    this.props.startLoading();
-    this.props.setLocation(param.name, countryCode)
-    this.props.fetchData();
   }
   
   restrictPastDate() {
@@ -35,11 +40,15 @@ class App extends Component {
     priordate.setDate(new Date().getDate()-30);
     return priordate.toISOString().slice(0,10);
   }
+
+  unixDateToday() {
+    return parseInt(new Date().getTime() / 1000);
+  }
   
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
     (position) => {
-       const date = parseInt(new Date().getTime() / 1000);
+       const date = this.unixDateToday();
        this.props.startLoading();
        this.props.currentLocationData(position.coords.latitude, position.coords.longitude, date);
      }

@@ -48,7 +48,7 @@ html {
       margin-left:20px;
     }
 
-    & .widget {
+    .widget {
       &.error {
         padding-top:15px;
         & .red {
@@ -58,43 +58,67 @@ html {
       background-color:rgba(0,0,0,0.1);
       margin-top:40px;
       padding:5px 10px 15px 10px;
-      & .temp {
+      margin-bottom:50px;
+      .temp {
         font-size:60px;
         margin:0;
       }
-
-      & .city {
+      .city {
         margin-bottom:0;
         font-size:30px;
         margin-top: 10px;
       }
-
-      & .country {
+      .country {
         margin-top:0;
       }
+      .lighter {
+        font-weight:300;
+        & span, & > .wi {
+          margin-right:20px;
+        }
+      }
     }
+  
+  .weather-hourly {
+      padding:10px 10px 15px 10px;
+     .hourly {
+      margin-right:10px;
+       .hour {
+         font-size: 12px;
+         color: rgba(255,255,255,0.6)
+       }
+        i.wi {
+          font-size:17px;
+          margin-top: 7px;
+        }
+      .temperature {
+        font-size: 14px;
+       }
+       p {
+         margin:0 5px;
+       }
+    }
+  }
 
 }
 
 
-.lighter {
-  font-weight:300;
-}
+
 
 .pac-container {
   font-size: 25px;
         font-weight:300;
         font-family: 'Quicksand', sans-serif;
   background-color:rgba(0,0,0,0.8);
-  & .pac-item {
+  .pac-item {
     border:0;
     cursor: pointer;
   }
-  & .pac-item-query {
+  .pac-item-query {
     color: white;
   }
-  & .pac-item:hover{
-    & .pac-item-query {color: black!important;}
+  .pac-item:hover{
+    .pac-item-query {color: black!important;}
   } 
 }
 
@@ -147,3 +171,49 @@ input[type="date"]:before {
   input[type="date"]:valid:before {
     content: "";
   }
+
+.menu-item {
+  padding: 0 40px;
+  margin: 5px 10px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+}
+
+.menu-item-wrapper {
+  text-align: center;
+}
+
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 720px) {
+  .App {
+    div.params {
+      input {
+        margin-bottom:20px;
+      }
+      & > input#date {
+        margin-left:0;
+      }
+    }
+    .widget {
+      padding:10px 0 15px 0;
+      & .lighter {
+        span {
+          display: block;
+          margin-right: 0;
+        }
+        .wi {
+          font-size:80px;
+          margin-right:0;
+        }
+      }
+    }
+    .weather-hourly {
+      padding: 10px 0 15px 0
+    }
+  }
+}

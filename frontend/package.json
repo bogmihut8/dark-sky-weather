@@ -8,6 +8,7 @@
     "react": "^16.8.3",
     "react-datepicker": "^2.1.0",
     "react-dom": "^16.8.3",
+    "react-horizontal-scrolling-menu": "^0.5.4",
     "react-icons-weather": "^1.0.5",
     "react-redux": "^6.0.1",
     "react-scripts": "2.1.5",

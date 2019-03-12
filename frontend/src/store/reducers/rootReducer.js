@@ -1,4 +1,5 @@
 const rootReducer = (state = {}, action) => {
+
    switch (action.type) {
     case 'FETCHED_DATA':
       return {
@@ -17,6 +18,9 @@ const rootReducer = (state = {}, action) => {
             windSpeed: action.data.daily.data[0].windSpeed,
             humidity: action.data.daily.data[0].humidity
           
+        },
+        hourly : {
+          ...action.data.hourly
         }
       };
      case 'START_LOADING':
