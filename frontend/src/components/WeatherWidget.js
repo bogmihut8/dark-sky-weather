@@ -11,7 +11,7 @@ const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
 const WeatherWidget = ({data}) => {
 
   if(data.daily) {
-    const hourly = HourlyContainer(data.hourly.data);
+    const hourly = HourlyContainer(data.hourly.data, data.offset);
     return (
       <div className="widget">
 				<h3 className="city">{data.location}, {data.countryCode}</h3>
@@ -25,7 +25,11 @@ const WeatherWidget = ({data}) => {
           <span>Min: <b>{parseInt(data.daily.temperatureMin)}°C</b></span>
         </h1>
         <p className="summary">{data.daily.summary}</p>
-        <h4 className="country lighter">
+        <h4 className="lighter">
+          <span>&#9728;&#8593; <b>{new Date((data.daily.sunriseTime + ((data.offset - 2) * 3600)) * 1000).getHours()}:{new Date((data.daily.sunriseTime + ((data.offset - 2) * 3600)) * 1000).getMinutes()}</b></span>
+          <span>&#9728;&#8595; <b>{new Date((data.daily.sunsetTime + ((data.offset - 2) * 3600)) * 1000).getHours()}:{new Date((data.daily.sunsetTime + ((data.offset - 2) * 3600)) * 1000).getMinutes()}</b></span>
+        </h4>
+        <h4 className="lighter">
           <span>Precipitation: <b>{data.daily.precipProbability ? parseInt(data.daily.precipProbability * 100) : '0'}%</b></span>
           <span>Humidity: <b>{parseInt(data.daily.humidity * 100)}%</b></span>
           <span>Wind: <b>{data.daily.windSpeed} km/h</b></span>

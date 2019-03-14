@@ -20,6 +20,7 @@ export const fetchData = () => {
 export const currentLocationData = (lat, long, date) => {
   return (dispatch, getState) => {
     // make async call to database
+    console.log(getState());
     axios
       .get(`/currentLocation`, {params: {lat: lat, long: long, date: date}})
       .then(res => {
