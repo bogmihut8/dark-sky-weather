@@ -12,4 +12,11 @@ const Hourly = ({ date, icon, temperature, offset }) => {
   );
 };
   
+Hourly.propTypes = {
+  date: PropTypes.number,
+  icon: PropTypes.string,
+  temperature: PropTypes.number,
+  offset: PropTypes.number
+}
+
 export default Hourly;

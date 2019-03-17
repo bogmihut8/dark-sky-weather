@@ -5,7 +5,13 @@ const HourlyContainer = (list, offset) => list.map(el => {
   const { time, icon, temperature } = el;
   
   return (
-    <Hourly date={time} icon={icon} temperature={temperature} offset={offset} key={time}/>
+    <Hourly 
+      date={time} 
+      icon={icon} 
+      temperature={temperature} 
+      offset={offset} 
+      key={time}
+    />
   );
 });
 

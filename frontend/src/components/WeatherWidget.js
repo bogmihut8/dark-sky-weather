@@ -26,8 +26,8 @@ const WeatherWidget = ({data}) => {
         </h1>
         <p className="summary">{data.daily.summary}</p>
         <h4 className="lighter">
-          <span>&#9728;&#8593; <b>{new Date((data.daily.sunriseTime + ((data.offset - 3) * 3600)) * 1000).getHours()}:{new Date((data.daily.sunriseTime + ((data.offset - 3) * 3600)) * 1000).getMinutes() > 9 ? new Date((data.daily.sunriseTime + ((data.offset - 3) * 3600)) * 1000).getMinutes() : "0"+new Date((data.daily.sunriseTime + ((data.offset - 3) * 3600)) * 1000).getMinutes()}</b></span>
-          <span>&#9728;&#8595; <b>{new Date((data.daily.sunsetTime + ((data.offset - 3) * 3600)) * 1000).getHours()}:{new Date((data.daily.sunsetTime + ((data.offset - 3) * 3600)) * 1000).getMinutes() > 9 ? new Date((data.daily.sunsetTime + ((data.offset - 3) * 3600)) * 1000).getMinutes() : "0"+new Date((data.daily.sunsetTime + ((data.offset - 3) * 3600)) * 1000).getMinutes()}</b></span>
+          <span>&#9728;&#8593; <b>{new Date((data.daily.sunriseTime + ((data.offset - 2) * 3600)) * 1000).getHours()}:{new Date((data.daily.sunriseTime + ((data.offset - 2) * 3600)) * 1000).getMinutes() > 9 ? new Date((data.daily.sunriseTime + ((data.offset - 2) * 3600)) * 1000).getMinutes() : "0"+new Date((data.daily.sunriseTime + ((data.offset - 2) * 3600)) * 1000).getMinutes()}</b></span>
+          <span>&#9728;&#8595; <b>{new Date((data.daily.sunsetTime + ((data.offset - 2) * 3600)) * 1000).getHours()}:{new Date((data.daily.sunsetTime + ((data.offset - 2) * 3600)) * 1000).getMinutes() > 9 ? new Date((data.daily.sunsetTime + ((data.offset - 2) * 3600)) * 1000).getMinutes() : "0"+new Date((data.daily.sunsetTime + ((data.offset - 2) * 3600)) * 1000).getMinutes()}</b></span>
         </h4>
         <h4 className="lighter">
           <span>Precipitation: <b>{data.daily.precipProbability ? parseInt(data.daily.precipProbability * 100) : '0'}%</b></span>
