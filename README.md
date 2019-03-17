@@ -9,3 +9,10 @@ The technologies used were:
 - state management (Redux)
 - side effects middleware (Thunk)
 - server-side api wrapper (NodeJS)
+
+How to run:
+> git clone
+> npm install
+> cd frontend
+> npm install
+> npm run launch
