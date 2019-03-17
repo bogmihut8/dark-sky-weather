@@ -10,7 +10,8 @@
 
 ### How to run:
 ```
-> git clone
+> git clone **project-git**
+> cd **project-name**
 > npm install
 > cd frontend
 > npm install
