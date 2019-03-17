@@ -9,11 +9,11 @@
 
 ### How to run:
 ```
-  "git clone"
-  "npm install"
-  "cd frontend"
-  "npm install"
-  "npm run launch"
+> git clone
+> npm install
+> cd frontend
+> npm install
+> npm run launch
 ```
 
 ### The technologies used were:
