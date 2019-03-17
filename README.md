@@ -5,7 +5,7 @@
 
 ### Flow
 > When you first access it, the weather from your location and the current date will be displayed. 
-> Selecting a new location will hold the inital time and modifying the current date will keep the previous location.
+> Selecting only a new location will display for the inital time and modifying just the date will display for the previous location.
 
 ### How to run:
 ```
