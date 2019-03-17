@@ -4,7 +4,6 @@ import React from "react";
 class Autocomplete extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
     this.autocompleteInput = React.createRef();
     this.autocomplete = null;
     this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
@@ -15,6 +14,7 @@ class Autocomplete extends React.Component {
       this.autocompleteInput.current,
       { types: ['(cities)']}
     );
+
     this.autocomplete.addListener("place_changed", this.handlePlaceChanged);
   }
 
@@ -30,6 +30,7 @@ class Autocomplete extends React.Component {
         id="location"
         placeholder="Enter your address"
         type="text"
+        defaultValue={this.props.value}
       />
     );
   }

@@ -20,10 +20,11 @@ export const fetchData = () => {
 export const currentLocationData = (lat, long, date) => {
   return (dispatch, getState) => {
     // make async call to database
-    console.log(getState());
     axios
       .get(`/currentLocation`, {params: {lat: lat, long: long, date: date}})
       .then(res => {
+        dispatch({ type: 'SET_DATE', data: date });
+        dispatch({ type: 'SET_LOCATION', data: {location: res.data.location, countryCode: res.data.countryCode}});
         dispatch({ type: 'FETCHED_DATA', data: res.data });
       })
       .catch(err => {

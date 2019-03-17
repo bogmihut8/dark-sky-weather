@@ -19,6 +19,7 @@ class App extends Component {
       this.props.fetchData();
     }
     else {
+      this.props.setDate(this.unixDate(param));
       this.props.dispatchError();
     }
   }
@@ -63,13 +64,13 @@ class App extends Component {
 
   render() {
     const {data} = this.props;
-    
+
     return (
       <div className="App">
         <h1>Dark Sky API Weather Implementation</h1>
         <p>Please select your desired location and optionally the date:</p>
         <div className="params">
-          <Autocomplete val={data.location} onPlaceChanged={this.handleLocationSubmit.bind(this)} />
+          <Autocomplete value={this.props.data.location} onPlaceChanged={this.handleLocationSubmit.bind(this)} />
           <DatePicker selected={data.formated} onChange={this.handleDateChange.bind(this)} placeholderText="Select a date" />
         </div>
         <p>The date can be from the past 30 days (observed) or from the future (forcasted)</p>
