@@ -15,7 +15,12 @@
 > npm install
 > cd frontend
 > npm install
+> cd ../
 > npm run launch
+```
+- if you get the "Invalid Host Header" it is becuase of the proxy used for the backend and you need to run it like:
+```
+> DANGEROUSLY_DISABLE_HOST_CHECK=true npm run launch
 ```
 
 ### The technologies used were:
